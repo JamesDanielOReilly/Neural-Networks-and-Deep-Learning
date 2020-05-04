@@ -6,7 +6,7 @@
 
 T = [1 1; -1 -1; 1 -1]';
 net = newhop(T);
-n=20;
+n=50;
 for i=1:n
     a={rands(2,1)};                     % generate an initial point 
     [y,Pf,Af] = sim(net,{1 50},{},a);   % simulation of the network for 50 timesteps              
