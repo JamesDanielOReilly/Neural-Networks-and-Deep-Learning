@@ -232,9 +232,9 @@ title('First convolutional layer weights')
 % % design choice, but typically starting with the layer right before the
 % % classification layer is a good place to start. In |convnet|, the this
 % % layer is named 'fc7'. Let's extract training features using that layer.
-% featureLayer = 'fc7';
-% trainingFeatures = activations(convnet, trainingSet, featureLayer, ...
-%     'MiniBatchSize', 32, 'OutputAs', 'columns');
+featureLayer = 'fc7';
+trainingFeatures = activations(convnet, trainingSet, featureLayer, ...
+    'MiniBatchSize', 32, 'OutputAs', 'columns');
 % %%
 % % Note that the activations are computed on the GPU and the 'MiniBatchSize'
 % % is set 32 to ensure that the CNN and image data fit into GPU memory.
