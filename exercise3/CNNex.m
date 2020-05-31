@@ -121,7 +121,68 @@ cnnMatFile = fullfile(tempdir, 'imagenet-caffe-alex.mat');
 
 %%
 % Note: Download time of the data depends on your internet connection.  The
+% next set of commands use MATLAB to download the data and w%%
+% Note: Download time of the data depends on your internet connection. The
 % next set of commands use MATLAB to download the data and will block
+% MATLAB. Alternatively, you can use your web browser to first download the
+% dataset to your local disk. To use the file you downloaded from the web,
+% change the 'outputFolder' variable above to the location of the
+% downloaded file.
+
+if ~exist(outputFolder, 'dir') % download only once
+    disp('Downloading 126MB Caltech101 data set...');
+    untar(url, outputFolder);
+end
+
+%% Load Images
+% Instead of operating on all of Caltech 101, which is time consuming, use
+% three of the categories: airplanes, ferry, and laptop. The image category
+% classifier will be trained to distinguish amongst these six categories.
+
+rootFolder = fullfile(outputFolder, '101_ObjectCategories');
+categories = {'airplanes', 'ferry', 'laptop'};
+
+%%
+% Create an |ImageDatastore| to help you manage the data. Because
+% |ImageDatastore| operates on image file locations, images are not loaded
+% into memory until read, making it efficient for use with large image
+% collections.
+imds = imageDatastore(fullfile(rootFolder, categories), 'LabelSource', 'foldernames');
+
+%%
+% The |imds| variable now contains the images and the category labels
+% associated with each image. The labels are automatically assigned from
+% the folder names of the image files. Use |countEachLabel| to summarize
+% the number of images per category.
+tbl = countEachLabel(imds)
+%%
+% Because |imds| above contains an unequal number of images per category,
+% let's first adjust it, so that the number of images in the training set
+% is balanced.
+
+minSetCount = min(tbl{:,2}); % determine the smallest amount of images in a category
+
+% Use splitEachLabel method to trim the set.
+imds = splitEachLabel(imds, minSetCount, 'randomize');
+
+% Notice that each set now has exactly the same number of images.
+countEachLabel(imds)
+
+%%
+% Below, you can see example images from three of the categories included
+% in the dataset.
+
+% Find the first instance of an image for each category
+airplanes = find(imds.Labels == 'airplanes', 1);
+ferry = find(imds.Labels == 'ferry', 1);
+laptop = find(imds.Labels == 'laptop', 1);
+
+figure
+subplot(1,3,1);
+imshow(imds.Files{airplanes})
+subplot(1,3,2);
+imshow(imds.Files{ferry})
+subplot(1,3,3);ill block
 % MATLAB. Alternatively, you can use your web browser to first download the
 % dataset to your local disk. To use the file you downloaded from the web,
 % change the 'cnnMatFile' variable above to the location of the downloaded
