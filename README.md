@@ -1,5 +1,5 @@
 # Neural-Networks-and-Deep-Learning
-Code and notes for my artificial neural networks and deep learning course at KU Leuven. The final 25 page report is also given as **final-report.pdf**. 
+Code and notes for my artificial neural networks and deep learning course at KU Leuven. Link to the final [25 page report](final-report.pdf). 
 The course and repo are split into four sections:
 
 ## 1. Supervised Learning and Generalisation
