@@ -9,8 +9,6 @@ This section focuses on understanding the basic elements of neural networks thro
   * Exploring activation functions
   * Network topology and exploring network hyperparameters
   * Bayesian inference of network hyperparameters
-
-![test](/images/fitted_curves.png)
   
 ## 2. Recurrent Networks
 A recurrent neural network (RNN) is a class of artificial neural networks where connections between nodes form a directed graph along a temporal sequence. This section explores different types of recurrent neural networks and applications with time-series analysis. This section includes:
